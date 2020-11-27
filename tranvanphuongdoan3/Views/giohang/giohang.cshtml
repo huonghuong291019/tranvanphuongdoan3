@@ -1,0 +1,68 @@
+﻿@using tranvanphuongdoan3.Models.Entities;
+@{
+    ViewBag.Title = "giohang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<CTDHang>
+<div class="container-fluid padding">
+    <div class="row padding" style="margin-top:50px" >
+        <div class="col-lg-8" style="padding:70px;">
+            <h2 style="font-size:40px;">Giỏ hàng</h2>
+            <a href="#"><p>Trang chủ </a><span>/ giỏ hàng</span></p>
+        </div>
+      
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="width: 1000px;margin-left: 70px; border: 1px solid #66666661;padding: 12px 20px;">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Sản phẩm trong giỏ của bạn:
+        <span id="count-cart" style="font-weight:bold">@ViewBag.count</span> <span>Sản phẩm</span>
+    </div>
+
+</div>
+<div class="container" style="margin-bottom:50px;margin-top:50px">
+    <div class="row" style="width:1000px;margin-left:70px;">
+        <table id="example1" border="1" style="width:100%;text-align:center">
+            <thead style="        background: #5eab9d4a;">
+                <tr>
+                    <th style="text-align: center; padding: 20px;">Ảnh sản phẩm</th>
+                    <th style="text-align: center; padding: 20px;">Tên sản phẩm</th>
+                    <th style="text-align: center; padding: 20px;">Đơn giá</th>
+                    <th style="text-align: center; padding: 20px;">Số lượng</th>
+                    <th style="text-align: center; padding: 20px;">Thành tiền</th>
+                    <th style="text-align: center; padding: 20px;">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="~/Content/images/@item.HinhAnh" style="width:50px;height:50px;" /></td>
+                        <td style="color:#666666e6">@item.TenSP</td>
+                        <td style="color:#666666e6">@(string.Format("{0:#,##0}", @item.DonGia))  </td>
+                        <td>@item.SoLuong</td>
+                        <td>@(string.Format("{0:#,##0}",item.SoLuong * item.DonGia))   </td>
+                        <td style="color: #0db577;"><a href="#" onclick="XoaGioHang('@item.MaSP')"><i class="glyphicon glyphicon-trash"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot style="        background: #5eab9d4a;">
+                <tr>
+                    <td colspan="2" rowspan="1"></td>
+                    <td colspan="3" style=" color: #333;font-size: 17px;font-family: sans-serif;padding:17px"><strong>Tổng tiền</strong></td>
+                    <td colspan="1" id="total_price" style="font-weight:bold;color:#e84d1c;font-size:17px;">@(string.Format("{0:#,##0}", ViewBag.tongtien))</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="row" style="margin-top: 30px; width: 1000px;margin-left: 70px;">
+        <a class="nav navbar-left" href=@Url.Action("index", "nhan") style="width: 200px;height: 40px;color: #666666db;border: 1px solid #6666;padding: 10px;text-align: center;"><i class="glyphicon glyphicon-chevron-left" style="font-size: 10px;margin-right: 10px;color: #666666db;"></i>  Tiếp tục mua hàng</a>
+        <a class="nav navbar-right" href=@Url.Action("checkout", "checkout") style="        width: 200px;
+        height: 40px;
+        margin-right: 0px;
+        background: #0f8873;
+        color: #fff;
+        text-align: center;
+        padding: 10px;">Tiến hành thanh toán  <i class="glyphicon glyphicon-chevron-right" style="font-size: 10px;margin-left: 10px;"></i></a>
+    </div>
+</div>

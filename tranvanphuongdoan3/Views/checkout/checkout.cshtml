@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Breadcumb Area Start ##### -->
+<div class="breadcumb_area bg-img" style="        background-image: url(../../Content/img/bg-img/breadcumb.jpg);margin-top:85px">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h2>Thanh toán</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcumb Area End ##### -->
+<!-- ##### Checkout Area Start ##### -->
+<div class="checkout_area section-padding-80">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <div class="checkout_details_area mt-50 clearfix">
+
+                    <div class="cart-page-heading mb-30">
+                        <h3>Địa chỉ giao hàng</h3>
+                    </div>
+
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name">Họ và tên<span>*</span></label>
+                                <input name="tenkh" id="hovatentxt" type="text" class="form-control" id="first_name" value="" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name">Email <span>*</span></label>
+                                <input name="email" id="email_address" type="text" class="form-control" id="last_name" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="company">SĐT nhận <span>*</span></label>
+                                <input name="sdtnhan" id="sdtNTxt" type="text" class="form-control" id="company" value="">
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="street_address">Địa chỉ nhận <span>*</span></label>
+                                <input name="diachinhan" id="addressNTA" type="text" class="form-control mb-3" id="street_address" value="">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                <div class="order-details-confirmation">
+
+                    <div class="cart-page-heading">
+                        <h5>Đơn hàng của bạn</h5>
+                        <p>Chi tiết đơn hàn</p>
+                    </div>
+                    <ul class="order-details-form mb-4">
+                        <li><span style="width:120px">Sản phẩm</span><span style="padding-right:20px">SL</span> <span>Đơn giá</span><span>Thành tiền</span></li>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <li><span style="width: 230px; text-transform: none; color: #0d887c; font-size: 12px">@item.TenSP</span><span style="width: 50px; text-transform: none; color: #0d887c; font-size: 12px">@item.SoLuong</span><span style="width: 150px;text-transform: none;color: #0d887c;font-size: 12px;padding-left: 12px;">@(string.Format("{0:#,##0}", item.DonGia)) đ</span> <span style="width: 120px;text-transform: none;color: #0d887c;font-size: 12px;padding-left: 5px;">@(string.Format("{0:#,##0}", item.SoLuong * item.DonGia)) đ</span></li>
+                            }
+                        }
+                        <li><span style="width:250px">Tổng tiền</span><span style="">@(string.Format("{0:#,##0}", ViewBag.tongtien)) đ</span></li>
+                    </ul>
+                        <a onclick="dathang()" class="btn essence-btn" style="padding: 18px; color: white;">Đặt hàng</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Checkout Area End ##### -->
+<script>
+    function dathang() {
+        var hovaten = $('#hovatentxt').val();
+        var mail = $('#email_address').val();
+        var diachinhan = $('#addressNTA').val();
+        var sdtn = $('#sdtNTxt').val();
+        if (macode = $('#macodeText').val()) {
+            var trangthai = 1;
+        }
+        else {
+            var macode = 0;
+            var trangthai = 0;
+        }
+        console.log(hovaten, mail, sdtn, diachinhan, macode, trangthai)
+        $.ajax({
+            url: '/checkout/DatHang',
+            type: 'POST',
+            dataType: 'json',
+            data: { tenkh: hovaten, email: mail, diachinhan: diachinhan, sdtnhan: sdtn, macode: macode, trangthai: trangthai },
+            success: function (result) {
+                if (result.success === true) {
+                    window.location = "/nhan/index";
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,89 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@using tranvanphuongdoan3.Models.Entities;
+@model  IPagedList<nhan>
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ##### Welcome Area Start ##### -->
+<section class="welcome_area bg-img background-overlay" style="        background-image: url(../../Content/images/slide1.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="hero-content">
+                    <h6 style="font-family:cursive">_hh</h6>
+                    <h2 style="color:white">Nhẫn cưới DOJI</h2>
+                    <a href="@Url.Action("index","nhan")" class="btn essence-btn" style="padding: 15px; font-weight: bold; color: #274e61; background: #d8e2e3;">Xem ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Welcome Area End ##### -->
+
+<section class="new_arrivals_area section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center">
+                    <h2>Sản phẩm mới</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @if (Model != null)
+                {
+                    for (int i = 0; i < Model.Count<nhan>(); i = i + 4)
+                    {
+
+                        <div class="popular-products-slides owl-carousel">
+                            @for (int j = 0; j < 4; j++)
+                            {
+                                if (i + j >= Model.Count<nhan>())
+                                {
+                                    break;
+                                }
+                                nhan l = Model.ElementAtOrDefault<nhan>(i + j);//Lấy sp tương ứng vs vị trí hàng i cột j
+                                <!-- Single Product -->
+                                <div class="single-product-wrapper">
+                                    <!-- Product Image -->
+                                    <div class="product-img">
+                                        <img src="~/Content/images/@l.image" alt="">
+                                        <!-- Favourite -->
+                                        <div class="product-favourite">
+                                            <a href="#" class="favme fa fa-heart"></a>
+                                        </div>
+                                    </div>
+                                    <!-- Product Description -->
+                                    <div class="product-description">
+                                        <span>Doji</span>
+                                        <a href=@Url.Action("chitietsanpham", "chitietsanpham", new { masp = l.manhan })>
+                                            <h6>@l.tennhan</h6>
+                                        </a>
+                                        <p class="product-price">@(string.Format("{0:#,##0}", l.dongia))</p>
+
+                                        <!-- Hover Content -->
+                                        <div class="hover-content">
+                                            <!-- Add to Cart -->
+                                            <div class="add-to-cart-btn">
+                                                <a onclick="ThemGioHang('@l.manhan','@l.dongia','@l.tennhan.Trim()','@l.image')" class="btn essence-btn" style="padding: 18px; color: white;">Thêm giỏ hàng</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ##### New Arrivals Area End ##### -->
