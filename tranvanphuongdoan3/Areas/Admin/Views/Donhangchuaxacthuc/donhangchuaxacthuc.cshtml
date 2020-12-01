@@ -1,0 +1,177 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+
+@{
+    ViewBag.Title = "donhangchuaxacthuc";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+@model IEnumerable<Donhang>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">SDT giao hàng</th>
+                        <th scope="col">Mã khách hàngt</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">SDT giao hàng</th>
+                        <th scope="col">Mã khách hàngt</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Donhang>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<Donhang>(i);
+                        <tr id="row_@l.madonhang">
+                            <td>@(i + 1)</td>
+                            <td id="cell0_@l.madonhang">@l.madonhang</td>
+                            <td id="cell1_@l.madonhang">@l.ngaytao</td>
+                            <td id="cell2_@l.madonhang">@(string.Format("{0:#,##0}", @l.thanhtien))</td>
+                            <td id="cell3_@l.madonhang">@l.diachigh</td>
+                            <td id="cell4_@l.madonhang">@l.sdtgh</td>
+                            <td id="cell5_@l.madonhang">@l.makh</td>
+                            <td id="cell6_@l.madonhang">@l.trangthai2</td>
+                            <td>
+                                <a href=@Url.Action("ChiTietDonHang", "chitietdonhang", new { madh = @l.madonhang }) class="btn" title="Xem chi tiết đơn hàng"><i class="far fa-eye"></i></a>
+                                <a class="btn" id="Sua_@l.madonhang" onclick="Sua('@l.madonhang','@l.ngaytao','@l.thanhtien','@l.diachigh','@l.sdtgh','@l.makh','@l.trangthai2')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách đơn hàng chưa xác thực</h1>
+    </div>
+}
+<div class="modal" id="SuaLoai">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                Trạng thái:
+                <input type="text" class="form-control" id="txtTRT" style="width: 450px;">(1 Hủy đơn)
+                <div id="txtMDH"style="display: none;"></div><div id="txtMDH" style="display: none;"></div>
+                <div id="txtNT" style="display: none;"></div>
+                <div id="txtTT" style="display: none;"></div>
+                <div id="txtDCGH" style="display: none;"></div>
+                <div id="txtSDTGH" style="display: none;"></div>
+                <div id="txtMKH" style="display: none;"></div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMDH').val())">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Section_script
+{
+    <script>
+            function Sua(id,ngaytao,thanhtien,diachigh,sdtgh,makh,trangthai2) {
+                $("#butUpdate").show();
+                $(".modal-title").html("Sửa trạng thái đơn hàng chưa xác thực ")
+                $('#txtMDH').text(id);
+                $("#txtNT").text(ngaytao);
+                $("#txtTT").text(thanhtien);
+                $("#txtDCGH").text(diachigh);
+                $("#txtSDTGH").text(sdtgh);
+                $("#txtMKH").text(makh);
+                $("#txtTRT").val(trangthai2);
+            }
+            function Update(id) {
+                event.preventDefault();
+                var madonhang = $('#txtMDH').text();
+                var ngaytao = $('#txtNT').text();
+                var thanhtien = $('#txtTT').text();
+                var diachigh = $('#txtDCGH').text();
+                var sdtgh = $('#txtSDTGH').text();
+                var makh = $('#txtMKH').text();
+                var trangthai2 = $('#txtTRT').val();
+                $.ajax(
+                 {
+                     url: '@Url.Action("SuaDonHang", "Donhangchuaxacthuc")',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         madonhang: madonhang,
+                         ngaytao: ngaytao,
+                         thanhtien: thanhtien,
+                         diachigh: diachigh,
+                         sdtgh: sdtgh,
+                         makh: makh,
+                         trangthai2: trangthai2
+                     },
+                     success: function (data) {
+                         if (data.success) {
+                             $('#cell9_' + id).text(trangthai2);
+                             alert(data.ms);
+                         }
+                         else {
+                             alert(data.ms);
+                         }
+                     },
+                     error: function (data) {
+                         alert('xay ra loi');
+                     }
+                 });               
+            }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

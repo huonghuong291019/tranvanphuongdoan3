@@ -1,0 +1,368 @@
+﻿
+@{
+    ViewBag.Title = "Trangchu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách loại sản phẩm</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+}
+
+
+
+
+
+
+
+@*<div class="row" style="width: 1030px;
+    margin-left: 281px;">
+<h2 style="margin-top:100px;">Danh sách nước hoa</h2>
+<button class="btn btn-primary" onclick="addrecode()" style="margin-bottom:30px;">Thêm nước hoa<i class="glyphicon glyphicon-plus"></i></button>
+<table class="table table-bordered table-striped" id="datatable">
+    <thead>
+        <tr>
+            <th>TT</th>
+            <th>Tên nước hoa</th>
+            <th>Hình ảnh</th>
+            <th>Giới tính</th>
+            <th>Dung tích</th>
+            <th>Năm sản xuất</th>
+            <th>Nhóm hương</th>
+            <th>Phong cách</th>
+            <th>Giá</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody id="datalist"></tbody>
+</table>
+@*lập trình ajax*@
+@*<script>
+    $(document).ready(function () {
+        //lấy DL về; biến data : lấy DL vần lấy về
+        $.get("../../Admin/Sanpham/getAllRecodes", function (data) {
+            $("#datalist").html("");//đưa DL về null để tránh việc trồng chéo DL; đưa thẻ html về null để khi request lại bản ghi sẽ ko thêm dưới đáy
+            var tt = 1;//số thứ tự
+            $.each(data, function (i, val) {//duyệt vòng foreach DL từ data sẽ chạy 1 function; i: chỉ số; val: gtri của each
+                $("#datalist").append("<tr>\
+                <td>"+ tt + "</td>\
+                <td title='Mã nước hoa="+ val.manuochoa + "; Mã loại="+val.maloai+"'>" + val.tennuochoa + "</td>\
+                <td>"+ val.hinhanh + "</td>\
+                <td>"+ val.gioitinh + "</td>\
+ <td>" + val.dungtich + "</td>\
+ <td>" + val.namsanxuat + "</td>\
+                <td>"+ val.nhomhuong + "</td>\
+ <td>" + val.phongcach + "</td>\
+ <td>" + val.gia + "</td>\
+                <td><button class='btn btn-info' onclick=\"chitiet('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-eye-open'></i></button></td>\
+                <td><button class='btn btn-success' onclick=\"editrecode('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-pencil'></i></button></td>\
+                <td><button class='btn btn-danger' onclick=\"delete1('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-trash'></i></button></td>\
+                </tr>");
+                tt++;
+            });
+            $("#datatable").DataTable();//search
+        });
+    })
+    function loaddata() {//hàm load lại dl
+        $.get("../../Admin/Sanpham/getAllRecodes", function (data) {
+            $("#datalist").html("");
+            var tt = 1;
+            $.each(data, function (i, val) {//duyệt vòng foreach DL từ data sẽ chạy 1 function; i: chỉ số; val: gtri của each
+                $("#datalist").append("<tr>\
+                <td>"+ tt + "</td>\
+                <td title='Mã nước hoa="+ val.manuochoa + "; Mã loại=" + val.maloai + "'>" + val.tennuochoa + "</td>\
+                <td>"+ val.hinhanh + "</td>\
+                <td>"+ val.gioitinh + "</td>\
+                 <td>" + val.dungtich + "</td>\
+                 <td>" + val.namsanxuat + "</td>\
+                <td>"+ val.nhomhuong + "</td>\
+                 <td>" + val.phongcach + "</td>\
+                 <td>" + val.gia + "</td>\
+                <td><button class='btn btn-info' onclick=\"chitiet('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-eye-open'></i></button></td>\
+                <td><button class='btn btn-success' onclick=\"editrecode('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-pencil'></i></button></td>\
+                <td><button class='btn btn-danger' onclick=\"delete1('" + val.manuochoa + "')\"><i class='glyphicon glyphicon-trash'></i></button></td>\
+                </tr>");
+                tt++;
+            });
+            $("#datatable").DataTable();//search
+        });
+    }*@
+    @*//function chitiet(manuochoa) {*@
+    @*//    $.get("../../Admin/Sanpham/getOneRecode", { manuochoa: manuochoa }, function (data) {//lấy về đường dẫn; id: đằng trc bên phía server; id: đằng sau gtri truyền vào
+    //        $("#vmanuochoa").html(data.manuochoa);//vì đây là thẻ nên dùng html
+    //        $("#vtennuochoa").html(data.tennuochoa);
+    //        $("#vhinhanh").html(data.hinhanh);
+    //        $("#vmaloai").html(data.maloai);
+    //        $("#vgioitinh").html(data.gioitinh);
+    //        $("#vdungtich").html(data.dungtich);
+    //        $("#vnamsanxuat").html(data.namsanxuat);
+    //        $("#vnhomhuong").html(data.nhomhuong);
+    //        $("#vphongcach").html(data.phongcach);
+    //        $("#vgia").html(data.gia);
+    //    })
+    //    $("#viewrecode").modal("show");
+    //}*@
+    @*function editrecode(manuochoa) {
+        $("#AOD").val("0");
+        $("#tieude").html("<h3>Sửa bản ghi</h3>");
+        $("#showhide").hide();
+        $.get("../../Admin/Sanpham/getOneRecode", { manuochoa: manuochoa }, function (data) {
+            $("#manuochoa").val(data.manuochoa);
+            $("#tennuochoa").val(data.tennuochoa);
+            $("#hinhanh").val(data.hinhanh);
+            $("#maloai").val(data.maloai);
+            $("#gioitinh").val(data.gioitinh);
+            $("#dungtich").val(data.dungtich);
+            $("#namsanxuat").val(data.namsanxuat);
+            $("#nhomhuong").val(data.nhomhuong);
+            $("#phongcach").val(data.phongcach);
+            $("#gia").val(data.gia);
+        });
+        $("#addoreditrecode").modal("show");
+    }
+    function delete1(manuochoa) {
+        $.get("../../Admin/Sanpham/getOneRecode", { manuochoa: manuochoa }, function (data) {
+            $("#dmanuochoa").html(data.manuochoa);
+            $("#dtennuochoa").html(data.tennuochoa);
+            $("#dhinhanh").html(data.hinhanh);
+            $("#dmaloai").html(data.maloai);
+            $("#dgioitinh").html(data.gioitinh);
+            $("#ddungtich").html(data.dungtich);
+            $("#dnamsanxuat").html(data.namsanxuat);
+            $("#dnhomhuong").html(data.nhomhuong);
+            $("#dphongcach").html(data.phongcach);
+            $("#dgia").html(data.gia);
+        });
+        $("#removeonerecode").modal("show");
+    }
+    function deleterecode() {
+        var manuochoa= $("#manuochoa").html();
+        $.get("../../Admin/Sanpham/deleteOneRecode", { manuochoa: manuochoa }, function (data) {
+            alert(data.msg);
+            loaddata();
+        });
+        $("#removeonerecode").modal("hide");
+    }
+    function addrecode() {
+        $("#AOD").val("1");
+        $("#tieude").html("<h3>Thêm bản ghi</h3>");
+        $("#manuochoa").val("");
+        $("#tennuochoa").val("");
+        $("#hinhanh").val("");
+        $("#maloai").val("");
+        $("#gioitinh").val("");
+        $("#dungtich").val("");
+        $("#namsanxuat").val("");
+        $("#nhomhuong").val("");
+        $("#phongcach").val("");
+        $("#gia").val("");
+        $("#showhide").show();
+        $("#addoreditrecode").modal("show");
+    }
+    function savedata() {
+        var manuochoa = $("#manuochoa").val();
+        var tennuochoa = $("#tennuochoa").val();
+        var hinhanh = $("#hinhanh").val();
+        var maloai = $("#maloai").val();
+        var gioitinh = $("#gioitinh").val();
+        var dungtich = $("#dungtich").val();
+        var namsanxuat = $("#namsanxuat").val();
+        var nhomhuong = $("#nhomhuong").val();
+        var phongcach = $("#phongcach").val();
+        var gia = $("#gia").val();
+        var AOD = $("#AOD").val();
+        $.get("../../Admin/Sanpham/getSaveRecode", { manuochoa: manuochoa, tennuochoa: tennuochoa, hinhanh: hinhanh, maloai: maloai, gioitinh: gioitinh, dungtich: dungtich, namsanxuat: namsanxuat, nhomhuong: nhomhuong, phongcach: phongcach, gia: gia, AOD: AOD },
+            function (data) {
+                alert(data.msg);
+                loaddata();
+            });
+        $("#addoreditrecode").modal("hide");
+    }
+</script>*@
+@*<div class="modal fade" id="viewrecode">*@
+    @*fade: tạo hiệu ứng bay vào, nếu muốn hiện ra luôn chỉ dùng modal*@
+    @*<div class="modal-dialog">*@
+        @*modal-dialog: khi click sẽ hiển thị form*@
+        @*<div class="modal-content">*@
+            @*nd bên trong*@
+            @*<div class="modal-header">*@
+                @*tiêu đề của content*@
+                @*<button class="close" data-dismiss="modal">&times;</button>*@@*khi click sẽ đóng form*@
+                @*<h3 class="modal-title">Thông tin nước hoa</h3>
+            </div>
+            <div class="modal-body">*@
+                @*nd của modal*@
+                @*<div class="col-md-12">
+                    <div class="col-md-4">Mã nước hoa</div>
+                    <div class="col-md-8" id="vmanuochoa"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Tên nước hoa</div>
+                    <div class="col-md-8" id="vtennuochoa"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Hình ảnh</div>
+                    <div class="col-md-8" id="vhinhanh"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Mã loại</div>
+                    <div class="col-md-8" id="vmaloai"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Giới tính</div>
+                    <div class="col-md-8" id="vgioitinh"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Dung tích</div>
+                    <div class="col-md-8" id="vdungtich"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Năm sản xuất</div>
+                    <div class="col-md-8" id="vnamsanxuat"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Nhóm hương</div>
+                    <div class="col-md-8" id="vnhomhuong"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Phong cách</div>
+                    <div class="col-md-8" id="vphongcach"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Giá</div>
+                    <div class="col-md-8" id="vgia"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Close<i class="glyphicon glyphicon-folder-close"></i></button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div class="modal fade" id="addoreditrecode">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title" id="tieude">Thông tin nước hoa</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12" id="showhide">
+                    <div class="col-md-4">Mã nước hoa</div>
+                    <div class="col-md-8"><input type="text" id="manuochoa" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Tên nước hoa</div>
+                    <div class="col-md-8"><input type="text" id="tennuochoa" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Hình ảnh</div>
+                    <div class="col-md-8"><input type="text" id="hinhanh" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Mã loại</div>
+                    <div class="col-md-8"><input type="text" id="maloai" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Giới tính</div>
+                    <div class="col-md-8"><input type="text" id="gioitinh" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Dung tích</div>
+                    <div class="col-md-8"><input type="text" id="dungtich" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Năm sản xuất</div>
+                    <div class="col-md-8"><input type="text" id="namsanxuat" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Nhóm hương</div>
+                    <div class="col-md-8"><input type="text" id="nhomhuong" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Phong cách</div>
+                    <div class="col-md-8"><input type="text" id="phongcach" /></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Giá</div>
+                    <div class="col-md-8"><input type="text" id="gia" /></div>
+                </div>
+            </div>
+            <input type="hidden" id="AOD" />
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" onclick="savedata()">Save<i class="glyphicon glyphicon-save"></i></button>
+                <button class="btn btn-danger" data-dismiss="modal">Close<i class="glyphicon glyphicon-folder-close"></i></button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<div class="modal fade" id="removeonerecode">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h3>Bạn có muốn xóa bản ghi này không</h3>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="col-md-4">Mã nước hoa</div>
+                    <div class="col-md-8" id="dmanuochoa"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Tên nước hoa</div>
+                    <div class="col-md-8" id="dtennuochoa"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Hình ảnh</div>
+                    <div class="col-md-8" id="dhinhanh"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Mã loại</div>
+                    <div class="col-md-8" id="dmaloai"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Giới tình</div>
+                    <div class="col-md-8" id="dgioitinh"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Dung tích</div>
+                    <div class="col-md-8" id="ddungtich"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Năm sản xuất</div>
+                    <div class="col-md-8" id="dnamsanxuat"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Nhóm hương</div>
+                    <div class="col-md-8" id="dnhomhuong"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Phong cách</div>
+                    <div class="col-md-8" id="dphongcach"></div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">Gia</div>
+                    <div class="col-md-8" id="dgia"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="deleterecode()">Delete<i class="glyphicon glyphicon-trash"></i></button>
+                <button class="btn btn-danger" data-dismiss="modal">Close<i class="glyphicon glyphicon-folder-close"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>*@
+
+
+
+
+

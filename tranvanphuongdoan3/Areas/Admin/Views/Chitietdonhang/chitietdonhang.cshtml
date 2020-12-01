@@ -1,0 +1,129 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+
+@{
+    ViewBag.Title = "chitietdonhang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@model IEnumerable<Chitietdonhang>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã nước hoa</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã nước hoa</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Chitietdonhang>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<Chitietdonhang>(i);
+                        <tr id="row_@l.madonhang">
+                            <td>@(i+1)</td>
+                            <td title='Mã đơn hàng="+ @l.madonhang + "' id="cell1_@l.madonhang">@l.manuochoa</td>
+                            <td id="cell2_@l.madonhang">@l.soluong</td>
+                            <td id="cell3_@l.madonhang">@l.dongia</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách chi tiết đơn hàng <@ViewBag.madonhang></h1>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

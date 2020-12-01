@@ -1,0 +1,251 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+
+@{
+    ViewBag.Title = "nhaphang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+@model IEnumerable<nhaphang>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Mã hóa đơn nhập </th>
+            <th scope="col">Mã nhà cung cấp</th>
+            <th scope="col">Ngày nhập</th>
+            <th scope="col">Thành tiền</th>
+            <th scope="col"> Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody id="bang">
+        @{ var sloai = Model.Count<nhaphang>();
+        }
+        @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<nhaphang>(i);
+            <tr id="row_@l.mahoadonnhap">
+                <td id="cell0_@l.mahoadonnhap">@l.mahoadonnhap</td>
+                <td id="cell1_@l.mahoadonnhap">@l.mancc</td>
+                <td id="cell2_@l.mahoadonnhap">@l.ngaynhap</td>
+                <td id="cell3_@l.mahoadonnhap">@(string.Format("{0:#,##0}", l.thanhtien))</td>
+                <td>
+                    <a class="btn" id="Sua_@l.mahoadonnhap" onclick="Sua('@l.mahoadonnhap')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
+                    <a class="btn" id="Xoa_@l.mahoadonnhap" onclick="Xoa('@l.mahoadonnhap')"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- The Modal -->
+<div class="modal" id="SuaLoai">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="float: left;width: 516px;">
+                    Mã hóa đơn nhập:
+                    <input type="text" class="form-control" id="txtMaHDN" style="width: 450px;">
+                </div>
+                <div>
+                    Mã nhà cung cấp:
+                    <input type="text" class="form-control" id="txtMaNCC" style="width: 450px;" />
+                </div>
+                <div style="float: left;width: 516px;">
+                    Ngày nhập:
+                    <input type="text" class="form-control" id="txtNN" style="width: 450px;">
+                    </div>
+                <div>
+                    Thành tiền:
+                    <input type="text" class="form-control" id="txtTT" style="width: 450px;">
+                </div>
+                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMaHDN').val())">Update</button>
+                <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách hóa đơn nhập</h1>
+        <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#SuaLoai"><i class="fas fa-plus"></i> Thêm hóa đơn nhập</a>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+}
+
+@section Section_script
+{
+    <script>
+
+        function ThemLoai_Click()
+        {
+            $("#butAdd").show();
+            $(".modal-title").html("Thêm thông tin hóa đơn nhập")
+            $("#butUpdate").hide();
+            $("#txtMaHDN").val('');
+            $("#txtMaNCC").val('');
+            $("#txtNN").val('');
+            $("#txtTT").val('');
+        }
+
+        function Sua(id)
+        {
+            $("#butAdd").hide();
+            $("#butUpdate").show();
+            $(".modal-title").html("Sửa thông tin hóa đơn nhập")
+            $('#txtMaHDN').val($('#cell0_'+id).html());
+            $('#txtMaNCC').val($('#cell1_'+id).html());
+            $('#txtNN').val($('#cell2_' + id).html());
+            $('#txtTT').val($('#cell3_' + id).html());
+        }
+        function Insert()
+        {
+            event.preventDefault();
+            // Lấy dữ liệu nhập vào trên Model
+            var mahoadonnhap = $('#txtMaHDN').val();
+            var mancc = $('#txtMaNCC').val();
+            var ngaynhap = $('#txtNN').val();
+            var thanhtien = $('#txtTT').val();
+            // Gọi thực thi phương thức Insert vào csdl
+            $.ajax(
+             {
+                 url: '@Url.Action("ThemLoaiSP", "Nhaphang")',
+                 type: 'POST',
+                 dataType: 'json',
+                 data: {
+                     mahoadonnhap: mahoadonnhap,
+                     mancc: mancc,
+                     ngaynhap: ngaynhap,
+                     thanhtien:thanhtien
+                 },
+                 success: function (data) {
+
+                     if (data.success) {
+                         //location.reload();
+                         $('#bang:last-child').
+                             append("<tr  id=row_" + mahoadonnhap + "> <td>" + mahoadonnhap + "</td> <td>" + mancc + "</td> <td>" + ngaynhap + "</td> <td>" + thanhtien+ "</td></tr>");
+                         alert("<tr> <td>" + mahoadonnhap + "</td> <td>" + mancc + "</td> <td>" + ngaynhap + "</td> <td>" + thanhtien + "</td></tr>");
+
+
+                     }
+                     else {
+                         alert(data.ms);
+                     }
+                 },
+                 error: function (data) {
+                     alert('xay ra loi');
+                 }
+             });
+        }
+        function Update(id)
+        {
+            event.preventDefault();
+
+            var mahoadonnhap=$('#txtMaHDN').val();
+            var mancc=$('#txtMaNCC').val();
+            var ngaynhap = $('#txtNN').val();
+            var thanhtien = $('#txtTT').val();
+           $.ajax(
+            {
+                url: '@Url.Action("SuaLoaiSP", "Nhaphang")',
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    mahoadonnhap: mahoadonnhap,
+                    mancc: mancc,
+                    ngaynhap: ngaynhap,
+                    thanhtien: thanhtien
+                },
+                success: function(data)
+                {
+
+                    if (data.success)
+                    {
+
+                        $('#cell1_'+id).html(mancc);
+                        $('#cell2_' + id).html(ngaynhap);
+                        $('#cell3_' + id).html(thanhtien);
+
+                    }
+                    else
+                    {
+                        alert(data.ms);
+                    }
+                },
+                error: function (data) {
+                    alert('xay ra loi');
+                }
+                });
+        }
+        function Xoa(id)
+        {
+            var cf = confirm('bạn có chắc chắn xóa không');
+            if (cf)
+            {
+                $.ajax(
+                    {
+                        url: '@Url.Action("XoaLoaiSP","Nhaphang")',
+                        //'/LoaiSanPham/XoaLoaiSP',
+                        type: 'Post',
+                        datatype: 'Json',
+                        data: { id: id },
+                        success:function(dl)
+                        {
+                            if (dl.success)
+                            {
+                                // location.reload();
+                                $('#row_' + id).remove();
+                            }
+                        }
+                    }
+                    )
+            }
+        }
+        function Xoa1(id) {
+            var cf=confirm('are you want to delete?');
+            if (cf)
+                {
+            $.ajax({
+                url: '@Url.Action("XoaLoaiSP", "Nhaphang")',
+                //url:'/LoaiSanPham/XoaLoaiSP',
+                type: 'POST',
+                dataType: 'json',
+                data:{id:id},
+                success: function (data) {
+                    if (data.success) {
+                        $("#row_"+ id).remove();
+                        //location.reload();
+                    }
+
+
+                },
+                error: function () {
+                    alert("Xóa thất bại");
+
+                }
+            });
+        }
+        }
+
+
+    </script>
+}
+
+
+
+
+

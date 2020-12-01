@@ -1,0 +1,372 @@
+﻿@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using tranvanphuongdoan3.Areas.Bussiness;
+@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+@{
+    ViewBag.Title = "sanphamadmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+@model IEnumerable<Sanpham>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Mã loại</th>
+                        <th scope="col">Màu sắc</th>
+                        <th scope="col">Chất liệu</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Hình ảnh</th>
+                        <th scope="col">Mã loại</th>
+                        <th scope="col">Màu sắc</th>
+                        <th scope="col">Chất liệu</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Sanpham>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<Sanpham>(i);
+                    <tr id="row_@l.manhan">
+                        <td>@(i+1)</td>
+                        <td title='Mã sản phẩm="@l.manhan"' id="cell2_@l.manhan">@l.tennhan</td>
+                        <td id="cell7_@l.manhan"><img src="~/Content/images/@l.image" style="width: 50px;height: 50px;" /></td>
+                        <td id="cell1_@l.manhan">@l.maloai</td>
+                        <td id="cell3_@l.manhan">@l.mausac</td>
+                        <td id="cell4_@l.manhan">@l.chatlieu</td>
+                        <td id="cell5_@l.manhan">@(string.Format("{0:#,##0}", l.dongia)) </td>
+                        <td id="cell6_@l.manhan">@l.soluong</td>
+                        <td>
+                            <input type="hidden" id="manhan_@l.manhan" value="@l.manhan" />
+                            <a class="btn" id="Sua_@l.manhan" onclick="Sua('@l.manhan')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
+                            <a class="btn" id="Xoa_@l.manhan" onclick="Xoa('@l.manhan')"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="SuaLoai">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Sửa thông tin  sản phẩm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="float: left;width: 516px;">
+                    Mã SP:
+                    <input type="text" class="form-control" id="txtMaSP1"style="width: 450px;">
+                </div>
+                <div >
+                    Tên sản phẩm:
+                    <input type="text" class="form-control" id="txtTenSP1"style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px">
+                    Hình ảnh:
+                    <input type="file" class="form-control" id="txtHA1"style="width: 450px;">
+                </div>
+                <div>
+                    Mã loại:
+                    <input type="text" class="form-control" id="txtML1"style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px">
+                    Màu sắc:
+                    <input type="text" class="form-control" id="txtMS1"style="width: 450px;">
+                </div>
+                <div>
+                    Chất liệu:
+                    <input type="text" class="form-control" id="txtCL1"style="width: 450px;">
+                </div>
+                <div>
+                    Giá:
+                    <input type="text" class="form-control" id="txtG1"style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px">
+                    Số lượng:
+                    <input type="text" class="form-control" id="txtSL1" style="width: 450px;">
+                </div>
+                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMaSP1').val())">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="ThemLoai">
+    <div class="modal-dialog">
+        <div class="modal-content"style="width: 1000px;margin-left: -240px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thêm thông tin sản phẩm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="float: left;width: 516px;">
+                    Mã sản phẩm:
+                    <input type="text" class="form-control" id="txtMaSP" style="width: 450px;" />
+                </div>
+                <div>
+                    Tên sản phẩm:
+                    <input type="text" class="form-control" id="txtTenSP" style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px;">
+                    Hình ảnh:
+                    <input type="file" class="form-control" id="txtHA" style="width: 450px;">
+                </div>
+                <div>
+                    Mã loại:
+                    <input type="text" class="form-control" id="txtML" style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px;">
+                    Màu sắc:
+                    <input type="text" class="form-control" id="txtMS" style="width: 450px;">
+                </div>
+                <div>
+                   Chất liệu:
+                    <input type="text" class="form-control" id="txtCL" style="width: 450px;">
+                </div>
+                <div>
+                    Giá:
+                    <input type="text" class="form-control" id="txtG" style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px">
+                    Số lượng:
+                    <input type="text" class="form-control" id="txtSL" style="width: 450px;">
+                </div>
+                </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"> @ViewBag.tenloai</h1>
+        <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#ThemLoai"><i class="fas fa-plus"></i> Thêm sản phẩm</a>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+}
+
+@section Section_script
+{
+    <script>
+
+        function ThemLoai_Click()
+        {
+            $("#butAdd").show();
+            $("#txtMaSP").val('');
+            $("#txtTenSP").val('');
+            $("#txtHA").val('');
+            $("#txtML").val('');
+            $("#txtMS").val('');
+            $("#txtCL").val('');
+            $("#txtG").val('');
+            $("#txtSL").val('');
+        }
+
+        function Sua(id) {
+            $("#butAdd").hide();
+            $("#butUpdate").show();
+            $(".modal-title").html("Sửa thông tin sản phẩm")
+            $('#txtMaSP1').val($('#manhan_' + id).val());
+            $('#txtML1').val($('#cell1_' + id).html());
+            $('#txtTenSP1').val($('#cell2_' + id).html());
+            $('#txtMS1').val($('#cell3_' + id).html());
+            $('#txtCL1').val($('#cell4_' + id).html());
+            $('#txtG1').val($('#cell5_' + id).html());
+            $('#txtSL1').val($('#cell6_' + id).html());
+        }
+        function Insert()
+        {
+            event.preventDefault();
+            // Lấy dữ liệu nhập vào trên Model
+
+            var manhan = $('#txtMaSP').val();
+            console.log(manhan)
+            var tennhan = $('#txtTenSP').val();
+            var image = $('#txtHA').val();
+            var maloai = $('#txtML').val();
+            var mausac = $('#txtMS').val();
+            var chatlieu = $('#txtCL').val();
+            var dongia = $('#txtG').val();
+            var soluong = $('#txtSL').val();
+            // Gọi thực thi phương thức Insert vào csdl
+            $.ajax(
+             {
+                 url: '@Url.Action("ThemSP", "SanphamAdmin")',
+                 type: 'POST',
+                 dataType: 'json',
+                 data: {
+                     manhan: manhan,
+                     maloai: maloai,
+                     tennhan: tennhan,
+                     mausac: mausac,
+                     chatlieu: chatlieu,
+                     dongia: dongia,
+                     soluong:soluong,
+                     image: image
+
+                 },
+                 success: function (data) {
+
+                     if (data.success) {
+                         $('#bang:last-child').
+                             append("<tr  id=row_" + manhan + "> <td>" + manhan + "</td> <td>" + maloai + "</td> <td>" + tennhan + "</td>  <td>" + mausac + "</td>  <td>" + chatlieu + "</td>  <td>" + dongia + "</td>  <td>" + soluong + "</td>  <td>" + image + "</td> </tr>");
+                         alert("<tr> <td>" + manhan + "</td> <td>" + maloai + "</td> <td>" + tennhan + "</td> <td>" + mausac + "</td>  <td>" + chatlieu + "</td>  <td>" + dongia + "</td>  <td>" + soluong + "</td>  <td>" + image + "</td>  </tr>");
+                     }
+                     else {
+                         alert(data.ms);
+                     }
+                 },
+                 error: function (data) {
+                     alert('xay ra loi');
+                 }
+             });
+        }
+        function Update(id)
+        {
+            event.preventDefault();
+
+            var tennhan = $('#txtTenSP1').val();
+            var image = $('#txtHA1').val();
+            var maloai = $('#txtML1').val();
+            var mausac = $('#txtMS1').val();
+            var chatlieu = $('#txtCL1').val();
+            var dongia = parseFloat($('#txtG1').val());
+            var soluong = parseInt($('#txtSL1').val());
+            console.log(tennhan, image, mausac, chatlieu, dongia, soluong)
+            // Gọi thực thi phương thức In
+           $.ajax(
+            {
+                url: '@Url.Action("SuaLoaiSP", "SanphamAdmin")',
+                type: 'get',
+                dataType:'json',
+                   data: {
+                       manhan: id,
+                       maloai: maloai,
+                       tennhan: tennhan,
+                       mausac: mausac,
+                       chatlieu: chatlieu,
+                       dongia: dongia,
+                       soluong: soluong,
+                       image: image
+                   
+                },
+                success: function(data)
+                {
+                    if (data.success)
+                    {
+                        $('#cell1_' + id).html(maloai);
+                        $('#cell2_' + id).html(tennhan);
+                        $('#cell4_' + id).html(mausac);
+                        $('#cell5_' + id).html(chatlieu);
+                        $('#cell6_' + id).html(dongia);
+                        $('#cell17_' + id).html(soluong);
+                    }
+                    else
+                    {
+                        alert(data.ms);
+                    }
+                },
+                error: function (data) {
+                    alert('xay ra loi');
+                }
+                });
+        }
+        function Xoa(id)
+        {
+            var cf = confirm('bạn có chắc chắn xóa không');
+            if (cf)
+            {
+                $.ajax(
+                    {
+                        url: '@Url.Action("XoaLoaiSP","SanphamAdmin")',
+                        type: 'Post',
+                        datatype: 'Json',
+                        data: { id: id },
+                        success:function(dl)
+                        {
+                            if (dl.success)
+                            {
+                                $('#row_' + id).remove();
+                            }
+                        }
+                    }
+                    )
+            }
+        }
+        function Xoa1(id) {
+            var cf=confirm('are you want to delete?');
+            if (cf)
+                {
+            $.ajax({
+                url: '@Url.Action("XoaLoaiSP", "SanphamAdmin")',
+                type: 'POST',
+                dataType: 'json',
+                data:{id:id},
+                success: function (data) {
+                    if (data.success) {
+                        $("#row_"+ id).remove();
+                    }
+                },
+                error: function () {
+                    alert("Xóa thất bại");
+
+                }
+            });
+        }
+        }
+    </script>
+}
+
+
+
+
+

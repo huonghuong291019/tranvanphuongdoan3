@@ -1,0 +1,309 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+@{
+    ViewBag.Title = "nhacungcap";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+
+
+@model IEnumerable<Nhacungcap>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">Mã nhà cung cấp </th>
+                        <th scope="col">Tên nhà cung cấp</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Mã nhà cung cấp </th>
+                        <th scope="col">Tên nhà cung cấp</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Nhacungcap>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+                    {
+                        var l = Model.ElementAtOrDefault<Nhacungcap>(i);
+                        <tr id="row_@l.mancc">
+                            <td id="cell0_@l.mancc">@l.mancc</td>
+                            <td id="cell1_@l.mancc">@l.tenncc</td>
+                            <td id="cell2_@l.mancc">@l.email</td>
+                            <td id="cell3_@l.mancc">@l.diachi</td>
+                            <td id="cell4_@l.mancc">@l.sdt</td>
+                            <td>
+                                <a class="btn" id="Sua_@l.mancc" onclick="Sua('@l.mancc')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
+                                <a class="btn" id="Xoa_@l.mancc" onclick="Xoa('@l.mancc')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="SuaLoai">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="float: left;width: 516px;">
+                    Mã nhà cung cấp:
+                    <input type="text" class="form-control" id="txtMaNcc" style="width: 450px;">
+                </div>
+                <div>
+                    Tên nhà cung cấp:
+                    <input type="text" class="form-control" id="txtTenNcc" style="width: 450px;">
+                </div>
+                <div style="float: left;width: 516px;">
+                    Email:
+                    <input type="text" class="form-control" id="txtEmail" style="width: 450px;">
+                </div>
+                <div>
+                    Địa chỉ:
+                    <input type="text" class="form-control" id="txtDiaChi" style="width: 450px;">
+                </div>
+                <div>
+                    SDT:
+                    <input type="text" class="form-control" id="txtSDT" style="width: 450px;">
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMaNcc').val())">Update</button>
+                <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách nhà cung cấp</h1>
+        <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#SuaLoai"><i class="fas fa-plus"></i> Thêm nhà cung cấp</a>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+}
+
+@section Section_script
+{
+    <script>
+
+            function ThemLoai_Click() {
+                $("#butAdd").show();
+                $(".modal-title").html("Thêm thông tin nhà cung cấp")
+                $("#butUpdate").hide();
+                $("#txtMaNcc").val('');
+                $("#txtTenNcc").val('');
+                $("#txtEmail").val('');
+                $("#txtDiaChi").val('');
+                $("#txtSDT").val('');
+            }
+
+            function Sua(id) {
+                $("#butAdd").hide();
+                $("#butUpdate").show();
+                $(".modal-title").html("Sửa thông tin nhà cung cấp")
+                $('#txtMaNcc').val($('#cell0_' + id).html());
+                $('#txtTenNcc').val($('#cell1_' + id).html());
+                $('#txtEmail').val($('#cell2_' + id).html());
+                $('#txtDiaChi').val($('#cell3_' + id).html());
+                $('#txtSDT').val($('#cell4_' + id).html());
+
+
+            }
+            function Insert() {
+                event.preventDefault();
+                // Lấy dữ liệu nhập vào trên Model
+                var mancc = $('#txtMaNcc').val();
+                var tenncc = $('#txtTenNcc').val();
+                var email = $('#txtEmail').val();
+                var diachi = $('#txtDiaChi').val();
+                var sdt = $('#txtSDT').val();
+
+
+                // Gọi thực thi phương thức Insert vào csdl
+                $.ajax(
+                 {
+                     url: '@Url.Action("ThemLoaiSP", "Nhacungcap")',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         mancc: mancc,
+                         tenncc: tenncc,
+                         email: email,
+                         diachi: diachi,
+                         sdt: sdt
+                     },
+                     success: function (data) {
+
+                         if (data.success) {
+                             //location.reload();
+                             $('#bang:last-child').
+                                 append("<tr  id=row_" + mancc + "> <td>" + mancc + "</td> <td>" + tenncc + "</td> <td>" + email + "</td> <td>" + diachi + "</td> <td>" + sdt + "</td></tr>");
+                             alert("<tr> <td>" + mancc + "</td> <td>" + tenncc + "</td> <td>" + email + "</td> <td>" + diachi + "</td> <td>" + sdt + "</td></tr>");
+
+
+                         }
+                         else {
+                             alert(data.ms);
+                         }
+                     },
+                     error: function (data) {
+                         alert('xay ra loi');
+                     }
+                 });
+            }
+            function Update(id) {
+                event.preventDefault();
+
+                var mancc = $('#txtMaNcc').val();
+                var tenncc = $('#txtTenNcc').val();
+                var email = $('#txtEmail').val();
+                var diachi = $('#txtDiaChi').val();
+                var sdt = $('#txtSDT').val();
+                $.ajax(
+                 {
+                     url: '@Url.Action("SuaLoaiSP", "Nhacungcap")',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         mancc: mancc,
+                         tenncc: tenncc,
+                         email: email,
+                         diachi: diachi,
+                         sdt: sdt
+                     },
+                     success: function (data) {
+
+                         if (data.success) {
+
+                             $('#cell1_' + id).html(tenncc);
+                             $('#cell2_' + id).html(email);
+                             $('#cell3_' + id).html(diachi);
+                             $('#cell4_' + id).html(sdt);
+
+                         }
+                         else {
+                             alert(data.ms);
+                         }
+                     },
+                     error: function (data) {
+                         alert('xay ra loi');
+                     }
+                 });
+            }
+            function Xoa(id) {
+                var cf = confirm('bạn có chắc chắn xóa không');
+                if (cf) {
+                    $.ajax(
+                        {
+                            url: '@Url.Action("XoaLoaiSP","Nhacungcap")',
+                            //'/LoaiSanPham/XoaLoaiSP',
+                            type: 'Post',
+                            datatype: 'Json',
+                            data: { id: id },
+                            success: function (dl) {
+                                if (dl.success) {
+                                    // location.reload();
+                                    $('#row_' + id).remove();
+                                }
+
+                            }
+                        }
+                        )
+                }
+            }
+            function Xoa1(id) {
+                var cf = confirm('are you want to delete?');
+                if (cf) {
+                    $.ajax({
+                        url: '@Url.Action("XoaLoaiSP", "Nhacungcap")',
+                        //url:'/LoaiSanPham/XoaLoaiSP',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.success) {
+                                $("#row_" + id).remove();
+                                //location.reload();
+                            }
+                        },
+                        error: function () {
+                            alert("Xóa thất bại");
+
+                        }
+                    });
+                }
+            }
+
+
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

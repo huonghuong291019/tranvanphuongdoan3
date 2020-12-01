@@ -1,0 +1,116 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+@{
+    ViewBag.Title = "xacthucthanhtoan";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@model IEnumerable<Donhang>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">SDT giao hàng</th>
+                        <th scope="col">Mã khách hàngt</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Địa chỉ giao hàng</th>
+                        <th scope="col">SDT giao hàng</th>
+                        <th scope="col">Mã khách hàngt</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Donhang>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<Donhang>(i);
+                        <tr id="row_@l.madonhang">
+                            <td>@(i + 1)</td>
+                            <td id="cell0_@l.madonhang">@l.madonhang</td>
+                            <td id="cell1_@l.madonhang">@l.ngaytao</td>
+                            <td id="cell2_@l.madonhang">@(string.Format("{0:#,##0}", @l.thanhtien))</td>
+                            <td id="cell3_@l.madonhang">@l.diachigh</td>
+                            <td id="cell4_@l.madonhang">@l.sdtgh</td>
+                            <td id="cell5_@l.madonhang">@l.makh</td>
+                            <td id="cell6_@l.madonhang">@l.trangthai</td>
+                            <td>
+                                <a href=@Url.Action("ChiTietDonHang", "chitietdonhang", new { madh = @l.madonhang }) class="btn" title="Xem chi tiết đơn hàng"><i class="far fa-eye"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Header
+{
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách đơn hàng đã thanh toán</h1>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

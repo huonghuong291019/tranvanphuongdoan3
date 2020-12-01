@@ -94,6 +94,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\content\image\anhft.jpg" />
+    <Content Include="Areas\Admin\content\image\huong.jpg" />
+    <Content Include="Areas\Admin\content\image\meocon.jpeg" />
+    <Content Include="Areas\Admin\content\image\phuong.jpg" />
+    <Content Include="Areas\Admin\content\jquery.dataTables.min.css" />
+    <Content Include="Areas\Admin\content\sb-admin-2.css" />
+    <Content Include="Areas\Admin\content\sb-admin-2.min.css" />
+    <Content Include="Areas\Admin\script\bootstrap.bundle.js" />
+    <Content Include="Areas\Admin\script\demo\chart-area-demo.js" />
+    <Content Include="Areas\Admin\script\demo\chart-pie-demo.js" />
+    <Content Include="Areas\Admin\script\jquery-3.3.1.min.js" />
+    <Content Include="Areas\Admin\script\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\script\js\demo\datatables-demo.js" />
+    <Content Include="Areas\Admin\script\sb-admin-2.js" />
+    <Content Include="Areas\Admin\script\sb-admin-2.min.js" />
+    <Content Include="Areas\Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Areas\Admin\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Areas\Admin\vendor\Chart.min.js" />
+    <Content Include="Areas\Admin\vendor\datatables\dataTables.bootstrap4.css" />
+    <Content Include="Areas\Admin\vendor\datatables\dataTables.bootstrap4.js" />
+    <Content Include="Areas\Admin\vendor\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Areas\Admin\vendor\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Areas\Admin\vendor\datatables\jquery.dataTables.js" />
+    <Content Include="Areas\Admin\vendor\datatables\jquery.dataTables.min.js" />
+    <Content Include="Areas\Admin\vendor\fontawesome-free\css\all.min.css" />
+    <Content Include="Areas\Admin\vendor\jquery-easing\jquery.easing.min.js" />
+    <Content Include="Areas\Admin\vendor\jquery\jquery.min.js" />
+    <Content Include="Areas\Admin\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -314,6 +342,28 @@
     <Content Include="Content\scss\_responsive.scss" />
     <Content Include="Content\scss\_theme_color.scss" />
     <Content Include="Content\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Chitietdonhang\chitietdonhang.cshtml" />
+    <Content Include="Areas\Admin\Views\Dagiao\dagiao.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhangchuaxacthuc\donhangchuaxacthuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhangdaxacthuc\donhangdaxacthuc.cshtml" />
+    <Content Include="Areas\Admin\Views\Donhang\donhang.cshtml" />
+    <Content Include="Areas\Admin\Views\ForgotPassword\forgotpassword.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\HomeAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\KhachhangAdmin\khachhangadmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Loai\loai.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Login\login.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhacungcap\nhacungcap.cshtml" />
+    <Content Include="Areas\Admin\Views\Nhaphang\nhaphang.cshtml" />
+    <Content Include="Areas\Admin\Views\Register\register.cshtml" />
+    <Content Include="Areas\Admin\Views\SanphamAdmin\sanphamadmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LeftMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Thongke\thongke.cshtml" />
+    <Content Include="Areas\Admin\Views\Trangchu\Trangchu.cshtml" />
+    <Content Include="Areas\Admin\Views\Trangchu\View.cshtml" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Xacthucthanhtoan\xacthucthanhtoan.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -326,6 +376,51 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Common\Encrypter.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChitietdonhangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DagiaoController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonhangchuaxacthucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonhangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DonhangdaxacthucController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KhachhangAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhacungcapController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhaphangController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RegisterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SanphamAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongkeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrangchuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\XacthucthanhtoanController.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\AccountModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\ChitietdonhangModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\DBContext.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\DonhangModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\KhachhangModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\LoaiModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\NhacungcapModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\NhaphangModel.cs" />
+    <Compile Include="Areas\Admin\Models\DataAccess\SanphamModel.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Account.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Chitietdonhang.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Donhang.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Khachhang.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Loai.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\LoginAccount.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Nhacungcap.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\nhaphang.cs" />
+    <Compile Include="Areas\Admin\Models\Entities\Sanpham.cs" />
+    <Compile Include="Areas\Bussiness\ChitietdonhangBus.cs" />
+    <Compile Include="Areas\Bussiness\DonhangBus.cs" />
+    <Compile Include="Areas\Bussiness\KhachhangAdminBus.cs" />
+    <Compile Include="Areas\Bussiness\LoaiBus.cs" />
+    <Compile Include="Areas\Bussiness\NhacungcapBus.cs" />
+    <Compile Include="Areas\Bussiness\NhaphangBus.cs" />
+    <Compile Include="Areas\Bussiness\SanphamAdminBus.cs" />
     <Compile Include="Bussiness\checkoutBus.cs" />
     <Compile Include="Bussiness\chitietsanphamBus.cs" />
     <Compile Include="Bussiness\loaiBus.cs" />
@@ -382,6 +477,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

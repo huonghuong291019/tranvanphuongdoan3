@@ -1,0 +1,327 @@
+﻿@using tranvanphuongdoan3.Areas.Admin.Models.Entities;
+@{
+    ViewBag.Title = "khachhangadmin";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+@model IEnumerable<Khachhang>
+
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="font-size: 13px;">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Tên khách hàng</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Tên khách hàng</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col"> Tác vụ</th>
+                    </tr>
+                </tfoot>
+                <tbody id="bang">
+                    @{ var sloai = Model.Count<Khachhang>();
+                    }
+                    @for (int i = 0; i < sloai; i++)
+            {
+                var l = Model.ElementAtOrDefault<Khachhang>(i);
+                        <tr id="row_@l.makh">
+                            <td>@(i+1)</td>
+                            <td id="cell0_@l.sdt">@l.sdt</td>
+                            <td id="cell1_@l.sdt">@l.tenkh</td>
+                            <td id="cell2_@l.sdt">@l.email</td>
+                            <td id="cell3_@l.sdt">@l.diachi</td>
+                            <td>
+                                <a class="btn" id="Sua_@l.sdt" onclick="Sua('@l.sdt')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
+                                <a class="btn" id="Xoa_@l.sdt" onclick="Xoa('@l.sdt')"><i class="far fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+    <!-- The Modal -->
+    <div class="modal" id="SuaLoai">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div>
+                        SDT:
+                        <input type="text" class="form-control" id="txtSDT" style="width: 450px;">
+                    </div>
+                    <div>
+                        Tên khách hàng:
+                        <input type="text" class="form-control" id="txtTenKh" style="width: 450px;">
+                    </div>
+                    <div style="float: left;width: 516px;">
+                        Email:
+                        <input type="text" class="form-control" id="txtEmail" style="width: 450px;">
+                    </div>
+                    <div>
+                        Địa chỉ:
+                        <input type="text" class="form-control" id="txtDiaChi" style="width: 450px;">
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtSDT').val())">Update</button>
+                    <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    @section Header
+{
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Danh sách khách hàng</h1>
+            <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#SuaLoai"><i class="fas fa-plus"></i> Thêm khách hàng</a>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
+    }
+
+    @section Section_script
+{
+        <script>
+
+            function ThemLoai_Click() {
+                $("#butAdd").show();
+                $(".modal-title").html("Thêm thông tin khách hàng")
+                $("#butUpdate").hide();
+                $("#txtSDT").val('');
+                $("#txtTenKh").val('');
+                $("#txtEmail").val('');
+                $("#txtDiaChi").val('');
+            }
+
+            function Sua(id) {
+                $("#butAdd").hide();
+                $("#butUpdate").show();
+                $(".modal-title").html("Sửa thông tin khách hàng")
+                $('#txtSDT').val($('#cell0_' + id).html());
+                $('#txtTenKh').val($('#cell1_' + id).html());
+                $('#txtEmail').val($('#cell2_' + id).html());
+                $('#txtDiaChi').val($('#cell3_' + id).html());
+
+
+            }
+            function Insert() {
+                event.preventDefault();
+                // Lấy dữ liệu nhập vào trên Model
+                var sdt = $('#txtSDT').val();
+                var tenkh = $('#txtTenKh').val();
+                var email = $('#txtEmail').val();
+                var diachi = $('#txtDiaChi').val();
+
+
+                // Gọi thực thi phương thức Insert vào csdl
+                $.ajax(
+                 {
+                     url: '@Url.Action("ThemLoaiSP", "KhachhangAdmin")',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         sdt: sdt,
+                         tenkh: tenkh,
+                         email: email,
+                         diachi: diachi,
+                     },
+                     success: function (data) {
+
+                         if (data.success) {
+                             //location.reload();
+                             $('#bang:last-child').
+                                 append("<tr  id=row_" + sdt + "> <td>" + sdt + "</td> <td>" + tenkh + "</td> <td>" + email + "</td> <td>" + diachi + "</td></tr>");
+                             alert("<tr> <td>" + sdt + "</td> <td>" + tenkh + "</td> <td>" + email + "</td> <td>" + diachi + "</td></tr>");
+                         }
+                         else {
+                             alert(data.ms);
+                         }
+                     },
+                     error: function (data) {
+                         alert('xay ra loi');
+                     }
+                 });
+            }
+            function Update(id) {
+                event.preventDefault();
+                var sdt = $('#txtSDT').val();
+                var tenkh = $('#txtTenKh').val();
+                var email = $('#txtEmail').val();
+                var diachi = $('#txtDiaChi').val();
+                $.ajax(
+                 {
+                     url: '@Url.Action("SuaLoaiSP", "KhachhangAdmin")',
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         sdt: sdt,
+                         tenkh: tenkh,
+                         email: email,
+                         diachi: diachi,
+                     },
+                     success: function (data) {
+
+                         if (data.success) {
+
+                             $('#cell1_' + id).html(tenkh);
+                             $('#cell2_' + id).html(email);
+                             $('#cell3_' + id).html(diachi);
+
+                         }
+                         else {
+                             alert(data.ms);
+                         }
+                     },
+                     error: function (data) {
+                         alert('xay ra loi');
+                     }
+                 });
+            }
+            function Xoa(id) {
+                var cf = confirm('bạn có chắc chắn xóa không');
+                if (cf) {
+                    $.ajax(
+                        {
+                            url: '@Url.Action("XoaLoaiSP","KhachhangAdmin")',
+                            //'/LoaiSanPham/XoaLoaiSP',
+                            type: 'Post',
+                            datatype: 'Json',
+                            data: { id: id },
+                            success: function (dl) {
+                                if (dl.success) {
+                                    // location.reload();
+                                    $('#row_' + id).remove();
+                                }
+
+                            }
+                        }
+                        )
+                }
+            }
+            function Xoa1(id) {
+                var cf = confirm('are you want to delete?');
+                if (cf) {
+                    $.ajax({
+                        url: '@Url.Action("XoaLoaiSP", "KhachhangAdmin")',
+                        //url:'/LoaiSanPham/XoaLoaiSP',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: { id: id },
+                        success: function (data) {
+                            if (data.success) {
+                                $("#row_" + id).remove();
+                                //location.reload();
+                            }
+
+
+                        },
+                        error: function () {
+                            alert("Xóa thất bại");
+
+                        }
+                    });
+                }
+            }
+
+
+        </script>
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

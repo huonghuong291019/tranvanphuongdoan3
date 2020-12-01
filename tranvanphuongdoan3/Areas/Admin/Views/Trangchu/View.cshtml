@@ -1,0 +1,876 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Fira+Sans+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <title>Admin</title>
+    <link href="~/Areas/Admin/content/sb-admin-2.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/content/sb-admin-2.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div class="left-header">
+            <div>
+                <img src="../Admin/anhbia.jpg" alt="">
+            </div>
+
+            <div class="pull-left info">
+                <p style="font-size: 20px; font-family: inherit;">Nguyễn Hải Đăng</p>
+                <a href="#" style="font-size: 11px; text-decoration: none;    color: forestgreen"><i class="fa fa-circle text-success"></i> Đang hoạt động</a>
+            </div>
+        </div>
+        <div class="right-header">
+            <div>
+                <input class="search" type="text" placeholder="Tìm kiếm..."><button><i class="fas fa-search"></i></button>
+            </div>
+            <div>
+                <i class="far fa-comment-alt"></i>
+                <i class="far fa-envelope"></i>
+                <i class="far fa-bell"></i>
+                <div class="img-acc" onclick="MyAcount()">
+                    <span>Nguyễn Hải Đăng</span>
+                    <div class="btn-acc">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="imge-acc" id="Acount">
+            <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                    <img src="../Admin/anhbia.jpg" cl>
+                    <p>
+                        NGUYỄN HẢI ĐĂNG - Web Developer
+                        <small>Member since Nov. 2018</small>
+                    </p>
+                </li>
+                <!-- Menu Body -->
+                <li class="user-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Theo dõi</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Bán hàng</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Bạn bè</a>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                    <div class="pull-left">
+                        <a href="#" class="btn btn-default btn-flat">Hồ sơ</a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="#" class="btn btn-default btn-flat">Đăng xuất </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section>
+        <div class="UserCases">
+            <p class="button-uc">
+                Quản lý nhân viên
+            </p>
+            <p class="button-uc">
+                Quản lý sản phẩm
+            </p>
+            <p class="button-uc">
+                Quản lý khách hàng
+            </p>
+            <p class="button-uc">
+                Quản lý đơn nhập
+            </p>
+            <p class="button-uc">
+                Quản lý đơn xuất
+            </p>
+            <p class="button-uc">
+                Quản lý nhà cung cấp
+            </p>
+        </div>
+        <script type="text/javascript">
+              function MyMenuBar(){
+                     var bars= document.getElementsByClassName('list-total')[0];
+                    bars.classList.toggle('item-click');
+                }
+        </script>
+        <div class="detail">
+            <div class="menubar" onclick="MyMenuBar()">
+                <i class="fas fa-bars fa-3x"></i>
+            </div>
+            <div class="list-total" id="bars">
+
+                <div class="total">
+                    <div>
+                        <i class="far fa-user"></i>
+                        <p class="total-detail">Nhân viên</p>
+                    </div>
+                </div>
+                <div class="total">
+                    <div>
+                        <i class="fas fa-shopping-basket"></i>
+                        <p class="total-detail">Sản Phẩm</p>
+                    </div>
+                </div>
+                <div class="total">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        <p class="total-detail"></p>
+                    </div>
+                </div>
+                <div class="total">
+                    <div>
+                        <i class="fas fa-file-invoice"></i>
+                        <p class="total-detail"></p>
+                    </div>
+                </div>
+                <div class="total">
+                    <div>
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <p class="total-detail"></p>
+                    </div>
+                </div>
+                <div class="total">
+                    <div>
+                        <i class="fas fa-home"></i>
+                        <p class="total-detail"></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="list-table">
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button>+ THÊM </button>
+                    </div>
+                    <table class="table-uc" id="nv">
+                        <thead>
+                            <tr>
+                                <th>Mã nhân viên</th>
+                                <th>Tên nhân viên</th>
+                                <th>Ngày sinh</th>
+                                <th>Giới tính</th>
+                                <th>Địa chỉ</th>
+                                <th>Chức vụ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>NV01</td>
+                                <td>Nguyễn Hải Đăng</td>
+                                <td>31-03-1999</td>
+                                <td>Nam</td>
+                                <td>Hưng Yên</td>
+                                <td>Nhân viên</td>
+                                <td>0352340838</td>
+                                <td>haidangnguyen3103@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NV02</td>
+                                <td>Đặng Thị Hoa</td>
+                                <td>04-03-2000</td>
+                                <td>Nữ</td>
+                                <td>Hà Nội </td>
+                                <td>Nhân viên</td>
+                                <td>0334563344</td>
+                                <td>hoaham0403@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NV03</td>
+                                <td>Triệu Thị Kiều Oanh</td>
+                                <td>24-06-1999</td>
+                                <td>Nữ</td>
+                                <td>Hà Nội</td>
+                                <td>Nhân viên</td>
+                                <td>0381413744</td>
+                                <td>trieuoanh2406@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NV04</td>
+                                <td>Nguyễn Văn Đức</td>
+                                <td>14-2-1999</td>
+                                <td>Nam</td>
+                                <td>TP. Hưng Yên</td>
+                                <td>Nhân viên</td>
+                                <td>0354325464</td>
+                                <td>ducthieugia@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NV05</td>
+                                <td>Bùi Văn Nam</td>
+                                <td>24-04-1998</td>
+                                <td>Nam</td>
+                                <td>Phù Cừ</td>
+                                <td>Nhân viên</td>
+                                <td>0390239585</td>
+                                <td>buivannam2404@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NV06</td>
+                                <td>Hoàng Thu Hương</td>
+                                <td>18-05-1999</td>
+                                <td>Nữ</td>
+                                <td>Sài Gòn</td>
+                                <td>Nhân viên</td>
+                                <td>0728959285</td>
+                                <td>hthuhuong@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button>+THÊM</button>
+                    </div>
+                    <table class="table-uc" id="sp">
+                        <thead>
+                            <tr>
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Mã danh mục</th>
+                                <th>Mã nhà cung cấp</th>
+                                <th>Giá bán</th>
+                                <th>Ảnh</th>
+                                <th>Màu sắc</th>
+                                <th>Số lượng</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="sorting_1">SP01</td>
+                                <td>Đèn trang trí</td>
+                                <td>Đèn</td>
+                                <td>UMAN</td>
+                                <td>315.000 ₫</td>
+                                <td><img src="../Sites/HinhAnh/anhdentrangtri.jpg" alt=""></td>
+                                <td>trắng</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP02</td>
+                                <td>Đồ dùng nhà bếp</td>
+                                <td>Xoong</td>
+                                <td>UMAN</td>
+                                <td>710.000đ</td>
+                                <td><img src="../Sites/HinhAnh/noi.jpg" alt=""></td>
+                                <td>trắng</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP03</td>
+                                <td>Gối</td>
+                                <td>Gối</td>
+                                <td>VNAHOME</td>
+                                <td>180.000đ</td>
+                                <td><img src="../Sites/HinhAnh/goi.jpg" alt=""></td>
+                                <td>Hồng</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP04</td>
+                                <td>Đèn ngủ 02</td>
+                                <td>Đèn</td>
+                                <td>UMAN</td>
+                                <td>150.000đ</td>
+                                <td><img src="../Sites/HinhAnh/den.jpg" alt=""></td>
+                                <td>trắng</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP05</td>
+                                <td>Ghế 04</td>
+                                <td>Ghế</td>
+                                <td>UMAN</td>
+                                <td>Liên hệ</td>
+                                <td><img src="../Sites/HinhAnh/ghe04.jpg" alt=""></td>
+                                <td>Đen</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP06</td>
+                                <td>Ghế 03</td>
+                                <td>Ghế</td>
+                                <td>MANUER</td>
+                                <td>Liên hệ </td>
+                                <td><img src="../Sites/HinhAnh/ghe03.jpg" alt=""></td>
+                                <td>Xám</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP07</td>
+                                <td>Ghế 02</td>
+                                <td>Ghế</td>
+                                <td>HAMSTAND</td>
+                                <td>Liên hệ </td>
+                                <td><img src="../Sites/HinhAnh/den02.jpg" alt=""></td>
+                                <td>Nâu</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP08</td>
+                                <td>Ghế 01</td>
+                                <td>Ghế</td>
+                                <td>HymManDesk</td>
+                                <td>Liên hệ </td>
+                                <td><img src="../Sites/HinhAnh/ghe01.jpg" alt=""></td>
+                                <td>Đen</td>
+                                <td>5</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP09</td>
+                                <td>Đèn chùm</td>
+                                <td>Đèn</td>
+                                <td>UMAN</td>
+                                <td>250.000đ</td>
+                                <td><img src="../Sites/HinhAnh/den03.jpg" alt=""></td>
+                                <td>Trắng</td>
+                                <td>16</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP10</td>
+                                <td>Ghế tựa 01</td>
+                                <td>Ghế</td>
+                                <td>WONERPASK</td>
+                                <td>200.000đ</td>
+                                <td><img src="../Sites/HinhAnh/ghetua.jpg" alt=""></td>
+                                <td>Trắng</td>
+                                <td>24</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="sorting_1">SP11</td>
+                                <td>Gối Đẹp</td>
+                                <td>Gối</td>
+                                <td>SONBABY</td>
+                                <td>370.000đ</td>
+                                <td><img src="../Sites/HinhAnh/goi01.jpg" alt=""></td>
+                                <td>Trắng</td>
+                                <td>31</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button> +THÊM</button>
+                    </div>
+                    <table class="table-uc" id="kh">
+                        <thead>
+                            <tr>
+                                <th>Mã khách hàng</th>
+                                <th>Tên khách hàng</th>
+                                <th>Ngày sinh</th>
+                                <th>Giới tính</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>KH01</td>
+                                <td>Nguyễn Văn Nam</td>
+                                <td>27-2-1998</td>
+                                <td>Nam</td>
+                                <td>Hưng Yên</td>
+                                <td>0355817589</td>
+                                <td>Nvnam98@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>KH02</td>
+                                <td>Bùi Đăng CƠ</td>
+                                <td>17-2-1999</td>
+                                <td>Nam</td>
+                                <td>Hưng Yên</td>
+                                <td>0355239549</td>
+                                <td>Bdco99@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>KH03</td>
+                                <td>Lê Xuân Thắng</td>
+                                <td>29-06-1999</td>
+                                <td>Nam</td>
+                                <td>Hưng Yên</td>
+                                <td>0355545669</td>
+                                <td>Xuanthang132@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>KH04</td>
+                                <td>Nguyễn Tường Vy</td>
+                                <td>10-09-1999</td>
+                                <td>Nữ</td>
+                                <td>Hưng Yên</td>
+                                <td>0353545353</td>
+                                <td>Tuongvy43@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>KH05</td>
+                                <td>Nguyễn Thị Hồng Nhung</td>
+                                <td>23-03-1999</td>
+                                <td>Nữ</td>
+                                <td>Hưng Yên</td>
+                                <td>0353583249</td>
+                                <td>hongnhung1223@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button> +THÊM</button>
+                    </div>
+                    <table class="table-uc" id="dn">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn nhập</th>
+                                <th>Mã nhà cung cấp</th>
+                                <th>Mã nhân viên</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Ngày nhập</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Thành tiền</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DN 01</td>
+                                <td>NCC Hà Nội</td>
+                                <td>NV 01</td>
+                                <td>SP 01</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>315.000 ₫</td>
+                                <td>6.300.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DN 02</td>
+                                <td>NCC VIMGROUP</td>
+                                <td>NV 04</td>
+                                <td>SP 09</td>
+                                <td>20-1-2019</td>
+                                <td>10</td>
+                                <td>900.000 ₫</td>
+                                <td>9.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DN 03</td>
+                                <td>NCC Hà Nội</td>
+                                <td>NV 02</td>
+                                <td>SP 04</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>150.000 ₫</td>
+                                <td>3.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DN 04</td>
+                                <td>NCC Hà Nội</td>
+                                <td>NV 05</td>
+                                <td>SP 03</td>
+                                <td>20-2-2019</td>
+                                <td>10</td>
+                                <td>180.000 ₫</td>
+                                <td>1.800.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button> +THÊM</button>
+                    </div>
+                    <table class="table-uc" id="dx">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn xuất</th>
+                                <th>Mã khách hàng</th>
+                                <th>Mã nhân viên</th>
+                                <th>Mã sản phẩm</th>
+                                <th>Ngày xuất</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Thành tiền</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DX 01</td>
+                                <td>KH 01</td>
+                                <td>NV 04</td>
+                                <td>SP 05</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>350.000 ₫</td>
+                                <td>7.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DX 01</td>
+                                <td>KH 01</td>
+                                <td>NV 04</td>
+                                <td>SP 05</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>350.000 ₫</td>
+                                <td>7.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DX 01</td>
+                                <td>KH 01</td>
+                                <td>NV 04</td>
+                                <td>SP 05</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>350.000 ₫</td>
+                                <td>7.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>DX 01</td>
+                                <td>KH 01</td>
+                                <td>NV 04</td>
+                                <td>SP 05</td>
+                                <td>20-2-2019</td>
+                                <td>20</td>
+                                <td>350.000 ₫</td>
+                                <td>7.000.000 ₫</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-table">
+                    <div class="btn-add">
+                        <button> +THÊM</button>
+                    </div>
+                    <table class="table-uc" id="ncc">
+                        <thead>
+                            <tr>
+                                <th>Mã nhà cung cấp</th>
+                                <th>Tên nhà cung cấp</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Sửa</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>NCC01</td>
+                                <td>NCC Hà Nội</td>
+                                <td>Hà Nội</td>
+                                <td>035879812</td>
+                                <td>ncchanoi@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NCC 02</td>
+                                <td>NCC SÀI GÒN</td>
+                                <td>TP. HỒ CHÍ MINH</td>
+                                <td>035879812</td>
+                                <td>ncchanoi@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NCC 03</td>
+                                <td>NCC Hà Nội</td>
+                                <td>Hà Nội</td>
+                                <td>035879812</td>
+                                <td>ncchanoi@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NCC 04</td>
+                                <td>NCC VICOMGROUP</td>
+                                <td>Hà Nội</td>
+                                <td>035879812</td>
+                                <td>ncchanoi@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                            <tr>
+                                <td>NCC 05</td>
+                                <td>NCC TRÀNG TIỀN PLARA</td>
+                                <td>Hà Nội</td>
+                                <td>035879812</td>
+                                <td>ncchanoi@gmail.com</td>
+                                <td><i class="far fa-edit"></i></td>
+                                <td><i class="far fa-trash-alt"></i></td>
+                            </tr>
+                        </tbody>
+                </div>
+
+                </table>
+            </div>
+        </div>
+    </section>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Bảng Sửa Thông tin Nhân Viên</p>
+            <form action="" id="form-nv">
+                <label for="">Mã nhân viên</label>
+                <input type="text" name="" id="" placeholder="Mã nhân viên">
+                <label for="">Tên nhân viên</label>
+                <input type="text" name="" id="" placeholder="Họ tên">
+                <label for="">Ngày sinh</label>
+                <input type="date" name="" id="">
+
+                <div class="radiogt">
+                    <label for="">Giới tính</label>
+                    <input type="radio" name="gt" value="nam" id="" checked>Nam <input type="radio" value="nữ" name="gt" id="">Nữ
+                </div>
+
+                <label for="">Địa chỉ</label>
+                <input type="text" name="" id="" placeholder="Địa chỉ">
+                <label for="">Chức vụ</label>
+                <select name="" id="">
+                    <option value="">Trưởng phòng</option>
+                    <option value="">Phó phòng</option>
+                    <option value="">Nhân viên</option>
+                </select>
+
+                <label for="">Số điện thoại</label>
+                <input type="text" name="" id="" placeholder="Số điện thoại">
+                <label for="">Email</label>
+                <input type="text" placeholder="Email">
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Thêm sản phẩm</p>
+            <form action="" id="form-sp">
+                <label for="">Mã sản phẩm</label>
+                <input type="text" name="" id="" placeholder="Mã sản phẩm">
+                <label for="">Tên sản phẩm</label>
+                <input type="text" name="" id="" placeholder="Tên sản phẩm">
+                <label for="">Mã danh mục</label>
+                <input type="text" name="" id="" placeholder="Mã danh mục">
+                <label for="">Mã nhà cung cấp</label>
+                <input type="text" name="" id="" placeholder="Mã nhà cung cấp">
+                <label for="">Giá bán</label>
+                <input type="text" name="" id="" placeholder="Giá bán">
+                <label for="">Ảnh</label>
+                <input type="file" name="" id="">
+                <label for="">Số lượng</label>
+                <input type="text" name="" id="" placeholder="Số lượng">
+                <label for="">Màu sắc</label>
+                <input type="text" name="" id="" placeholder="Màu sắc">
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Thêm khách hàng</p>
+            <form action="" id="form-kh">
+                <label for="">Mã khách hàng</label>
+                <input type="text" name="" id="" placeholder="Mã khách hàng">
+                <label for="">Tên khách hàng</label>
+                <input type="text" name="" id="" placeholder="Tên khách hàng">
+                <label for="">Ngày sinh</label>
+                <input type="date" name="" id="">
+                <div class="radiogt">
+                    <label for="">Giới tính</label>
+                    <input type="radio" name="gt" value="nam" id="" checked>Nam <input type="radio" value="nữ" name="gt" id="">Nữ
+                </div>
+                <label for="">Địa chỉ</label>
+                <input type="text" name="" id="" placeholder="Địa chỉ">
+                <label for="">Số điện thoại</label>
+                <input type="text" name="" id="" placeholder="Số điện thoại">
+                <label for="">Email</label>
+                <input type="text" name="" id="" placeholder="Email">
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Thêm đơn nhập</p>
+            <form action="" id="form-hdn">
+                <label for="">Mã đơn nhập</label>
+                <input type="text" name="" id="" placeholder="Mã đơn nhập">
+                <label for="">Mã nhà cung cấp</label>
+                <input type="text" name="" id="" placeholder="Mã nhà cung cấp">
+                <label for="">Mã nhân viên</label>
+                <input type="text" name="" id="" placeholder="Mã nhân viên">
+                <label for="">Mã sản phẩm</label>
+                <input type="text" name="" id="" placeholder="Mã sản phẩm">
+                <label for="">Ngày nhập</label>
+                <input type="date" name="" id="">
+                <label for="">Số lượng</label>
+                <input type="text" name="" id="" placeholder="Số lượng">
+                <label for="">Giá</label>
+                <input type="text" name="" id="" placeholder="Giá">
+                <label for="">Thành tiền: <span class="thanhtien">0 ₫</span></label>
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Thêm đơn xuất</p>
+            <form action="" id="form-hdx">
+                <label for="">Mã đơn xuất</label>
+                <input type="text" name="" id="" placeholder="Mã đơn xuất">
+                <label for="">Mã khách hàng</label>
+                <input type="text" name="" id="" placeholder="Mã khách hàng">
+                <label for="">Mã nhân viên</label>
+                <input type="text" name="" id="" placeholder="Mã nhân viên">
+                <label for="">Mã sản phẩm</label>
+                <input type="text" name="" id="" placeholder="Mã sản phẩm">
+                <label for="">Ngày xuất</label>
+                <input type="date" name="" id="">
+                <label for="">Số lượng</label>
+                <input type="text" name="" id="" placeholder="Số lượng">
+                <label for="">Giá</label>
+                <input type="text" name="" id="" placeholder="Giá">
+                <label for="">Thành tiền: <span class="thanhtien">0 ₫</span></label>
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-add">
+            <div class="btn-out">
+                <i class="fas fa-times"></i>
+            </div>
+            <p>Thêm nhà cung cấp</p>
+            <form action="" id="form-ncc">
+                <label for="">Mã nhà cung cấp</label>
+                <input type="text" name="" id="" placeholder="Mã nhà cung cấp">
+                <label for="">Tên nhà cung cấp</label>
+                <input type="text" name="" id="" placeholder="Tên nhà cung cấp">
+                <label for="">Địa chỉ</label>
+                <input type="text" name="" id="" placeholder="Địa chỉ">
+                <label for="">Số điện thoại</label>
+                <input type="text" name="" id="" placeholder="Số điện thoại">
+                <label for="">Email</label>
+                <input type="text" name="" id="" placeholder="Email">
+                <div class="button-add">
+                    <div class="add">Thêm</div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/script/datatables-demo.js"></script>
+    <script src="~/Areas/Admin/script/sb-admin-2.js"></script>
+    <script src="~/Areas/Admin/script/sb-admin-2.min.js"></script>
+</body>
+</html>
