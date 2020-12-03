@@ -33,7 +33,7 @@ namespace tranvanphuongdoan3.Areas.Admin.Models.DataAccess
         }
         public List<Donhang> layLoai()
         {
-            dt = db.FillDataTable("select * from DONHANG");
+            dt = db.FillDataTable("select * from donhang");
             List<Donhang> sp = new List<Donhang>();
             foreach (DataRow r in dt.Rows)
             {

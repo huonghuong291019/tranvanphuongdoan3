@@ -1,0 +1,41 @@
+﻿@using tranvanphuongdoan3.Models.Entities;
+@model List<nhan>
+@{
+    ViewBag.Title = "sprelative";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="popular-products-slides owl-carousel">
+    
+        @foreach (nhan l in Model)
+        {
+            <!-- Single s -->
+            <div class="single-product-wrapper">
+                <!-- Product Image -->
+                <div class="product-img">
+                    <img src="~/Content/images/@l.image" alt="">
+                    <!-- Favourite -->
+                    <div class="product-favourite">
+                        <a href="#" class="favme fa fa-heart"></a>
+                    </div>
+                </div>
+                <!-- Product Description -->
+                <div class="product-description">
+                    <span>Doji</span>
+                    <a href=@Url.Action("chitietsanpham", "chitietsanpham", new { masp = l.manhan })>
+                        <h6>@l.tennhan</h6>
+                    </a>
+                    <p class="product-price">@(string.Format("{0:#,##0}", l.dongia)) đ</p>
+
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <!-- Add to Cart -->
+                        <div class="add-to-cart-btn">
+                            <a onclick="ThemGioHang('@l.manhan','@l.dongia','@l.tennhan.Trim()','@l.image')" class="btn essence-btn" style="padding: 18px; color: white;">Thêm giỏ hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    
+</div>

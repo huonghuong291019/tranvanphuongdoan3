@@ -20,7 +20,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
-        margin-bottom:30px;
+        margin-bottom: 30px;
     }
 
     .dropdown-content {
@@ -50,7 +50,7 @@
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
     }
-</style>                                  
+</style>
 
 <div class="dropdown">
     <button class="dropbtn">Chọn loại nước hoa</button>
@@ -84,14 +84,14 @@
                     @{ var sloai = Model.Count<Loai>();
                     }
                     @for (int i = 0; i < sloai; i++)
-            {
-                var l = Model.ElementAtOrDefault<Loai>(i);
+                    {
+                        var l = Model.ElementAtOrDefault<Loai>(i);
                         <tr id="row_@l.maloai">
                             <td id="cell0_@l.maloai">@(i+1)</td>
                             <td title='Mã loại="@l.maloai"' id="cell1_@l.maloai">@l.tenloai</td>
                             <td id="cell2_@l.maloai" hidden="hidden">@l.mota</td>
                             <td>
-                                <input type="hidden"  id="maloai_@l.maloai" value="@l.maloai" / >
+                                <input type="hidden" id="maloai_@l.maloai" value="@l.maloai" />
                                 <a class="btn" id="Sua_@l.maloai" onclick="Sua('@l.maloai')" data-toggle="modal" data-target="#SuaLoai"><i class="far fa-edit"></i></a>
                                 <a class="btn" id="Xoa_@l.maloai" onclick="Xoa('@l.maloai')"><i class="far fa-trash-alt"></i></a>
                             </td>
@@ -101,57 +101,57 @@
             </table>
         </div>
     </div>
-    </div>
-    <!-- The Modal -->
-    <div class="modal" id="SuaLoai">
-        <div class="modal-dialog">
-            <div class="modal-content" style="width: 1000px;margin-left: -240px;">
+</div>
+<!-- The Modal -->
+<div class="modal" id="SuaLoai">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1000px;margin-left: -240px;">
 
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div style="float: left;width: 516px;">
-                        Mã loại:
-                        <input type="text" class="form-control" id="txtMaLoai"style="width: 450px;" >
-                    </div>
-                    <div>
-                        Tên loại:
-                        <input type="text" class="form-control" id="txtTenLoai"style="width: 450px;">
-                    </div>
-                    <div>
-                        Mô tả:
-                        <input type="text" class="form-control" id="txtMoTa"style="width: 450px;">
-                    </div>
-                    </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMaLoai').val())">Update</button>
-                    <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
-                </div>
-
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div style="float: left;width: 516px;">
+                    Mã loại:
+                    <input type="text" class="form-control" id="txtMaLoai" style="width: 450px;">
+                </div>
+                <div>
+                    Tên loại:
+                    <input type="text" class="form-control" id="txtTenLoai" style="width: 450px;">
+                </div>
+                <div>
+                    Mô tả:
+                    <input type="text" class="form-control" id="txtMoTa" style="width: 450px;">
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button id="butUpdate" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Update($('#txtMaLoai').val())">Update</button>
+                <button id="butAdd" type="button" class="btn btn-danger" data-dismiss="modal" onclick="Insert()">Add</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+            </div>
+
         </div>
     </div>
+</div>
 
-    @section Header
+@section Header
 {
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Danh sách loại sản phẩm</h1>
-            <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#SuaLoai"><i class="fas fa-plus"></i> Thêm Loại</a>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-        </div>
-    }
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Danh sách loại sản phẩm</h1>
+        <a style="color:white" onclick="ThemLoai_Click()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="Them_Loai" data-toggle="modal" data-target="#SuaLoai"><i class="fas fa-plus"></i> Thêm Loại</a>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>
+}
 
-    @section Section_script
+@section Section_script
 {
-        <script>
+    <script>
             function ThemLoai_Click() {
                 $("#butAdd").show();
                 $(".modal-title").html("Thêm thông tin loại sản phẩm")
@@ -255,8 +255,8 @@
                         )
                 }
             }
-        </script>
-    }
+    </script>
+}
 
 
 

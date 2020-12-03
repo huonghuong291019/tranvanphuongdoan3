@@ -350,7 +350,6 @@
     <Content Include="Areas\Admin\Views\ForgotPassword\forgotpassword.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\HomeAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\KhachhangAdmin\khachhangadmin.cshtml" />
-    <Content Include="Areas\Admin\Views\Loai\loai.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Login\login.cshtml" />
     <Content Include="Areas\Admin\Views\Nhacungcap\nhacungcap.cshtml" />
@@ -364,7 +363,9 @@
     <Content Include="Areas\Admin\Views\Trangchu\View.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Xacthucthanhtoan\xacthucthanhtoan.cshtml" />
+    <Content Include="Areas\Admin\Views\LoaiNhan\loainhan.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\controller\app.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -387,7 +388,7 @@
     <Compile Include="Areas\Admin\Controllers\ForgotPasswordController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\KhachhangAdminController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LoaiController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoaiNhanController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhacungcapController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhaphangController.cs" />
@@ -468,6 +469,9 @@
     <Content Include="Views\search\search.cshtml" />
     <Content Include="Views\giohang\giohang.cshtml" />
     <Content Include="Views\checkout\checkout.cshtml" />
+    <Content Include="Views\chitietsanpham\sprelative.cshtml" />
+    <Content Include="Views\giohang\Trong.cshtml" />
+    <Content Include="Views\nhan\sanphambanchay.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

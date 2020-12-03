@@ -8,13 +8,13 @@ using tranvanphuongdoan3.Areas.Admin.Models.Entities;
 
 namespace tranvanphuongdoan3.Areas.Admin.Controllers
 {
-    public class LoaiController : Controller
+    public class LoaiNhanController : Controller
     {
         // GET: Admin/Loai
         LoaiBus db = new LoaiBus();
         ChitietdonhangBus db1 = new ChitietdonhangBus();
         [HttpGet]
-        public ActionResult loai()
+        public ActionResult loainhan()
         {
             List<Loai> l = db.layLoai();
             return View(l);

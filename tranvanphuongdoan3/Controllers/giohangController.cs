@@ -15,6 +15,7 @@ namespace tranvanphuongdoan3.Controllers
         {
             List<CTDHang> gh = null;
             int tongtien = 0;
+            string rong = "Giỏ hàng trống";
             ViewBag.tongtien = "";
             int count = 0;
             if (Session["giohang"] != null)
@@ -25,12 +26,19 @@ namespace tranvanphuongdoan3.Controllers
                     tongtien += a.SoLuong * a.DonGia;
                 }
                 count = gh.Count;
+                ViewBag.count = count;
+                ViewBag.tongtien = tongtien;
+                return View(gh);
             }
-            ViewBag.count = count;
-            ViewBag.tongtien = tongtien;
-            return View(gh);
+            else
+                return Redirect("Trong/Trong");
+
         }
-        public ActionResult loadgiohang()
+        public ActionResult Trong()
+        {
+            return View();
+        }
+         public ActionResult loadgiohang()
         {
             List<CTDHang> gh = null;
             if (Session["giohang"] != null)
