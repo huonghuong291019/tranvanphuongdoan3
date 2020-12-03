@@ -1,18 +1,18 @@
-﻿@using tranvanphuongdoan3.Models.Entities;
+﻿@*@using tranvanphuongdoan3.Models.Entities;*@
 @{
     ViewBag.Title = "chitietsanpham";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model nhan
+@*@model nhan*@
 <!-- ##### Single Product Details Area Start ##### -->
-<section class="single_product_details_area d-flex align-items-center" style="margin-bottom:-150px">
-    @if (Model != null)
-    {
+<section class="single_product_details_area d-flex align-items-center" style="margin-bottom:-150px"  ng-controller="ctsp">
+    @*@if (Model != null)
+    {*@
 
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
             <div class="img" style="padding-left: 50px; padding-top: 40px;width:500px;height:500px ">
-                <img src="~/Content/images/@Model.image" alt="">
+                <img src="~/Content/images/{{ma.image}}" alt="">
             </div>
         </div>
 
@@ -20,11 +20,11 @@
         <div class="single_product_desc clearfix">
             <span>DOJI</span>
             <a href="cart.html">
-                <h2>@Model.tennhan</h2>
+                <h2>{{ma.tennhan}}</h2>
             </a>
-            <p class="product-price">@string.Format("{0:#,##0 VND}", @Model.dongia) đ</p>
-            <p>Màu sắc: @Model.mausac</p>
-            <p>Chất liệu: @Model.chatlieu</p>
+            <p class="product-price">{{ma.dongia|number}} đ</p>
+            <p>Màu sắc: {{ma.mausac}}</p>
+            <p>Chất liệu: {{ma.chatlieu}}</p>
             <!-- Form -->
             <form class="cart-form clearfix" method="post">
                 <!-- Select Box -->

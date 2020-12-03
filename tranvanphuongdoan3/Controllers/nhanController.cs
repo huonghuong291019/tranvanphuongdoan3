@@ -15,6 +15,11 @@ namespace tranvanphuongdoan3.Controllers
     {
 
         nhanBus db = new nhanBus();
+        public JsonResult sanpham()
+        {
+            List<nhan> lsp = db.LaySPham();
+            return Json(lsp, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult index(int? page = 1)
         {
             int pnum = page ?? 1;//nếu ko có ??(null) thì mặc định là 1

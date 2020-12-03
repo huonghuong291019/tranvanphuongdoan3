@@ -13,7 +13,11 @@ namespace tranvanphuongdoan3.Controllers
     {
         // GET: ChiTietSanPham
         chitietsanphamBus db = new chitietsanphamBus();
-
+        public JsonResult detail(string masp)
+        {
+            nhan sp = db.Laysp(masp);
+            return Json(sp, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult chitietsanpham(string masp, string maloai)
         {
             try

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
     <style>
         .owl-carousel .owl-stage-outer {
             position: relative;
@@ -51,7 +52,7 @@
     loaiModel db = new loaiModel();
 }
 
-<body>
+<body ng-app="myapp">
     <!-- ##### Header Area Start ##### -->
     <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
@@ -175,6 +176,7 @@
     <script src="~/Content/js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="~/Content/js/active.js"></script>
+    <script src="~/Scripts/controller/app.js"></script>
     <script>
         $(document).ready(function () {
             $("#butGioHang").click(function () {
